@@ -1,14 +1,11 @@
-import React, { Component } from "react";
-import { View, Text } from "react-native";
-import MobileRoot from "./js/MobileRoot.js"
-import ProductsList from "./js/ProductsList.js"
+import React from "react";
+import Root from "./js/Root.js"
+import { View, Text, Button } from "react-native"
+
 
 const App = () => {
   return(
-    <MobileRoot/>
-    // <View style={{flex: 1}}>
-    // <ProductsList/>
-    // </View>
+    <Root/>
   );
 }
 export default App;
