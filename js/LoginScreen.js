@@ -1,8 +1,21 @@
-import React from "react";
-import { View, Text, useState } from "react-native";
+import React, { useContext } from "react";
+import { View, Text, Button } from "react-native";
+import { AuthContext, AuthDebugger } from "./auth/auth.js"
+import { keys } from "./utils.js"
 
 const LoginScreen = ({navigation, route}) => {
-  const [userToken, setUserToken] = useState(null);
-  
+  const auth = useContext(AuthContext)
+
+  return (<>
+
+    <Button
+      title={"login"} 
+      onPress={() => {auth.login("test", "test")}}
+    />
+
+    <AuthDebugger/>
+
+  </>)
 }
 export default LoginScreen;
+

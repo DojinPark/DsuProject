@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text } from "react-native";
-import { ScreenOptions } from "./Styles.js"
+import { styles } from "./styles.js"
+import { AuthContext, AuthDebugger } from "./auth/auth.js"
 
+import { Button } from "react-native"
+
+const userToken = null;
 const UserScreen = ({navigation, route}) => {
-  navigation.setOptions(ScreenOptions);
-  return(
-    <View>
-      <Text>{"User Screen"}</Text>
-    </View>
-  )
+  navigation.setOptions(styles.options.userScreen);
+  const auth = useContext(AuthContext)
+
+  return(<>
+    <Button 
+      title={"logout"} 
+      onPress={() => auth.logout()}
+    />
+    <AuthDebugger/>
+  </>)
 }
 export default UserScreen;
