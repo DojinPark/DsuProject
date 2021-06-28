@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { screenOptions } from "./Styles.js"
+import { styles } from "./styles.js"
 
 const PostScreen = ({navigation, route}) => {
   const { title, writer, content } = route.params;
-  navigation.setOptions(screenOptions.postScreen)
+  navigation.setOptions(styles.options.postScreen)
   
   return(
     <View>

@@ -5,34 +5,11 @@ import { Dimensions } from "react-native"
 const { width } = Dimensions.get("window")
 const WIDTH = width
 
-export const screenOptions = {
-  homeTabMain: {
-    headerTitle: null
-  },
-  searchTab: {
-    headerTitle: null
-  },
-  socialTabMain: {
-    headerTitle: null
-  },
-  screen: {
-    headerTitle: null
-  },
-  tabScreen: {
-    headerShown: false
-  },
-  productScreen: {
-    headerStyle: {
-      backgroundColor: "transparent",
-    }
-  },
-  postScreen: {
-    dummy: true
-  }
-}
-
 export const styles = {
-  productCellItem: {
+  pressedOpacity: {
+    opacity: 0.5 
+  },
+  homeTabListCellItem: {
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
@@ -41,14 +18,11 @@ export const styles = {
     margin: 5,
     backgroundColor: "pink",
   },
-  productCellItemPressed: {
-    opacity: 0.5 
-  },
-  productCellDim: {
+  homeTabListCellDim: {
     width: WIDTH,
     height: 150
   },
-  postCellItem: {
+  socialTabListCellItem: {
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "start",
@@ -57,7 +31,7 @@ export const styles = {
     margin: 5,
     backgroundColor: "pink"
   },
-  postCellDim: {
+  socialTabListCellDim: {
     width: WIDTH,
     height: 100
   },
@@ -79,5 +53,37 @@ export const styles = {
     zindex: 1,
     //temp
     backgroundColor: "#AAA7",
+  },
+
+  // Navigator screens options
+  options: {
+    tabsScreen: {
+      headerShown: false
+    },
+    defaultScreen: {
+      headerTitle: null
+    },
+    homeTabMainScreen: {
+      headerTitle: null
+    },
+    searchTab: {
+      headerTitle: null
+    },
+    socialTabMainScreen: {
+      // headerTitle: null
+      headerShown: false
+    },
+    productScreen: {
+      headerStyle: {
+        backgroundColor: "transparent",
+      }
+    },
+    postScreen: {
+      dummy: true
+    },
+    userScreen: {
+
+    }
   }
 }
+

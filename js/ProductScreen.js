@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { screenOptions } from "./Styles.js"
+import { styles } from "./styles.js"
 
 const ProductScreen = ({navigation, route}) => {
   const { productName, price } = route.params
-  navigation.setOptions(screenOptions.productScreen)
+  navigation.setOptions(styles.options.productScreen)
   navigation.setOptions({title: productName})
   
   return(
