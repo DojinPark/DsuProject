@@ -30,17 +30,14 @@ const HomeTabList = (props) => {
         // setDataArray(longerDataArray) 
 
         //tune: synchronized or asynchronized data push
-        dataArray.current.push(...genProducts(15))
-        // for (let i=0; i<15; i++) {
-        //   dataArray.current.push(genProduct())
-        // }
-        // (async () => {dataArray.current.push(genProduct())})()
+        // dataArray.current.push(genProduct())
+        (async () => {dataArray.current.push(genProduct())})()
         setDataProvider(dataProvider.cloneWithRows(dataArray.current))
         
       }}
       renderFooter={() => <Text>Loading...</Text>}
-      renderAheadOffset={2250}
-      onEndReachedThreshold={2250}
+      renderAheadOffset={1500}
+      onEndReachedThreshold={1500}
       disableRecycling={true}
       // scrollThrottle={10}
     />

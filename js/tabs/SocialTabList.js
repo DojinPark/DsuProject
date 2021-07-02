@@ -22,8 +22,7 @@ const SocialTabList = (props) => {
       extendedState={{navigation: navigation}}
       onEndReached={() => {
         dataArray.current.push(...genPosts(10))
-        setDataProvider(dataProvider.cloneWithRows(dataArray.
-        current))
+        setDataProvider(dataProvider.cloneWithRows(dataArray.current))
       }} 
       rendererFooter={() => <ActivityIndicator/>}
     />

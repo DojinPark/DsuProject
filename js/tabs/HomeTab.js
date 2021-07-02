@@ -3,6 +3,7 @@ import { View, Text, Button } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { styles } from "../styles.js"
 import HomeTabList from "./HomeTabList.js"
+import { ToRestrictedButton } from "../auth/auth.js"
 import { AuthContext } from "../auth/auth.js"
 
 const Stack = createStackNavigator();
@@ -31,18 +32,15 @@ const UserButton = (props) => {
   const auth = useContext(AuthContext)
 
   return(
-    <Button
-      title="User"
-      onPress={() => {
-        switch(auth.authData.isLogin) {
-          case true:
-            navigation.navigate("UserScreen")
-            break
-          case false:
-            navigation.navigate("LoginScreen")
-            break
-        }
-      }}
-    />
+    <ToRestrictedButton
+      navigation={navigation}
+      redirectScreen={"UserScreen"}
+      style={({pressed}) => [
+        styles.userButton,
+        pressed ? styles.pressedOpacity : null
+      ]}
+    >
+    <Text>{"User"}</Text>
+    </ToRestrictedButton>
   )
 }

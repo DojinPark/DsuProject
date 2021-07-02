@@ -21,10 +21,10 @@ const Root = () => {
       <Stack.Screen name="TabsScreen" component={TabsScreen}/>
       <Stack.Screen name="ProductScreen" component={ProductScreen}/>
       <Stack.Screen name="PostScreen" component={PostScreen}/>
+      <Stack.Screen name="LoginScreen" component={LoginScreen}/>
       {auth.authData.isLogin
       ? <Stack.Screen name="UserScreen" component={UserScreen}/>
-      : <Stack.Screen name="LoginScreen" component={LoginScreen}/>
-      }
+      : null}
     </Stack.Navigator>
     </AuthContext.Provider>
     </NavigationContainer>

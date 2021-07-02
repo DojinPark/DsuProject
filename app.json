@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "dsuproject",
-    "slug": "DsuProject",
+    "name": "duckproject",
+    "slug": "DuckProject",
     "owner": "dojinpark",
+    "licesne": "BSD 3-clause",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

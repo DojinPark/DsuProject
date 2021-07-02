@@ -9,6 +9,12 @@ export const styles = {
   pressedOpacity: {
     opacity: 0.5 
   },
+  userButton: {
+    backgroundColor: "lightblue",
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+  },
   homeTabListCellItem: {
     justifyContent: "center",
     alignItems: "center",
