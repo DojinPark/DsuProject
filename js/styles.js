@@ -15,6 +15,7 @@ export const styles = {
     padding: 10,
     margin: 10,
   },
+  
   homeTabListCellItem: {
     justifyContent: "center",
     alignItems: "center",
