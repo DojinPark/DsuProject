@@ -1,11 +1,11 @@
-# Sample Snack app
+# Duck Project
+> A market for used K-POP items and a social app
+> Duck Project aims to feature flexible item & social posts categorization and personalized notification with hash algorithms
+> and planned to be monetized with paid promotions.
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+## Visit https://snack.expo.io/@git/github.com/DojinPark/DuckProject for interactive preview
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo-cli](https://docs.expo.io/get-started/installation).
-
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
-
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
-
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+## The Duck Project ...
+- uses React Native and Golang Echo as both ends of the architecture.
+- implements high-performant *RecyclerListView* (https://github.com/Flipkart/recyclerlistview) for items and posts lists.
+- as of June 29, 2021 Duck Project obatained a domain name "www.scrollduck.com"!
