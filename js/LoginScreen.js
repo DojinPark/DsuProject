@@ -1,11 +1,14 @@
-import React, { useContext, useEffect } from "react";
-import { View, Text, Button } from "react-native";
-import { AuthContext, AuthDebugger } from "./auth/auth.js"
-import { config } from "./utils.js"
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, Button } from 'react-native';
+import { config } from './utils.js'
+import { AuthContext, AuthDebugger } from './auth/auth.js'
+import TemporaryOverlay from './components/TemporaryOverlay.js'
 
 const LoginScreen = ({navigation, route}) => {
   const auth = useContext(AuthContext)
   const { redirectScreen, redirectParams } = route.params
+  const [ message, setMessage ] = useState(null)
+  const [ pressed, setPressed ] = useState(false)
 
   useEffect(() => {
       if (auth.authData.isLogin) {
@@ -16,17 +19,39 @@ const LoginScreen = ({navigation, route}) => {
     [auth.authData.isLogin]
   )
 
-  return (<>
+  useEffect(() => {
+    const condition = auth.authData.condition
+    if (condition !== config.CONDITION_OK) {
+      setMessage(condition.message)
+    } else {
+      setMessage(null)
+    }
+  }, [auth.authData])
 
+  return (<>
     <Button
-      title={"login"} 
+      title={'login'} 
       onPress={() => {
-        auth.login("test", "test")
+        auth.tryLogin('test', 'test')
+        setPressed(!pressed)
       }}
     />
 
-    <AuthDebugger/>
+    <Button
+      title={'tryout login'}
+      onPress={() => {
+        auth.testLogin({name: "test user name"})
+      }}
+    />
 
+    {message ?
+      <><TemporaryOverlay trigger={pressed}>
+        <Text>{message}</Text>
+      </TemporaryOverlay>
+      {}</>
+    :null}
+
+    <AuthDebugger/>
   </>)
 }
 export default LoginScreen;
