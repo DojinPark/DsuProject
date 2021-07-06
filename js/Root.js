@@ -30,4 +30,4 @@ const Root = () => {
     </NavigationContainer>
   )
 }
-export default Root;
+export default Root

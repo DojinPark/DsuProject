@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useCallback } from "react"
 import { View, Text, Pressable } from "react-native"
 import { AuthContext } from "./auth.js"
 
@@ -21,7 +21,7 @@ export const ToRestrictedButton = (props) => {
       }}
     >
 
-    {props.children}
+      {props.children}
 
     </Pressable>
   )

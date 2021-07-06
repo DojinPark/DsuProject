@@ -5,6 +5,8 @@ import { styles } from "../styles.js"
 import HomeTabList from "./HomeTabList.js"
 import { ToRestrictedButton } from "../auth/auth.js"
 import { AuthContext } from "../auth/auth.js"
+//test:
+import TemporaryOverlay from "../components/TemporaryOverlay.js"
 
 const Stack = createStackNavigator();
 
@@ -22,14 +24,19 @@ const HomeTabMainScreen = ({navigation, route}) => {
   navigation.setOptions({
     headerRight: () => <UserButton navigation={navigation}/>
   })
+
   return(
+    <>
     <HomeTabList navigation={navigation}/>
+    <TemporaryOverlay>
+      <Text style={{textAlign: 'center', fontSize: 14}}>{'Welcome to my demo🌼'}</Text>
+    </TemporaryOverlay>
+    </>
   )
 }
 
 const UserButton = (props) => {
   const navigation = props.navigation
-  const auth = useContext(AuthContext)
 
   return(
     <ToRestrictedButton
@@ -40,7 +47,7 @@ const UserButton = (props) => {
         pressed ? styles.pressedOpacity : null
       ]}
     >
-    <Text>{"User"}</Text>
+      <Text>{"User"}</Text>
     </ToRestrictedButton>
   )
 }

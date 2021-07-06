@@ -1,74 +1,57 @@
-import React, { createContext, useReducer, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useCallback, useMemo } from 'react'
 import { config } from '../utils.js'
 import { View, Text } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from 'expo-secure-store'
-import * as Adaptor from "./authAdaptors.js"
+import * as Adaptors from "./authAdaptors.js"
 
 export const AuthContext = createContext();
 
 export const useAuthHandler = () => {
   //test: wipe AsyncStorage
-  React.useMemo(() => {
-    AsyncStorage.clear()
-    SecureStore.deleteItemAsync(config.TOKEN)
-  }, [])
+  // React.useMemo(() => {
+  //   AsyncStorage.clear()
+  //   SecureStore.deleteItemAsync(config.TOKEN)
+  // }, [])
 
-  const [authData, dispatch] = useReducer((prevAuthData, action) => {
-    switch (action.type) {
-      case config.LOGIN:
-        return {...baseAuthData, ...action.results, isLogin: true}
-      case config.LOGOUT:
-        return {...baseAuthData, ...action.results, isLogin: false}
-      case config.RESTORE_LOGIN:
-        return {...baseAuthData, ...action.results, isLogin: true}
-      case config.SIGNUP:
-        return {...baseAuthData, ...action.results, isLogin: true}
+  const [ authData, setAuthData ] = useState(baseAuthData)
+  
+  const adaptors = useMemo(() => ({
+    testLogin: async (userData) => {
+      AsyncStorage.setItem(config.USER_DATA, await JSON.stringify(userData))
+      .catch(e => {throw e})
+      SecureStore.setItemAsync(config.TOKEN, "A-dummy-token")
+      .catch(e => {throw e})
+      setAuthData({ ...baseAuthData, isLogin: true, userData })
+    },
+    testLogout: () => {
+      AsyncStorage.removeItem(config.USER_DATA)
+      .catch(e => {throw e})
+      SecureStore.deleteItemAsync(config.TOKEN)
+      .catch(e => {throw e})
+      setAuthData({ ...baseAuthData, isLogin: false})
+    },
+    tryLogin: async (username, password) => {
+      let results = await Adaptors.tryLoginAsync(username, password)
+      setAuthData({ ...baseAuthData, ...results })
+    },
+    tryLogout: async () => {
+      let results = await Adaptors.tryLogoutAsync()
+      setAuthData({ ...baseAuthData, ...results })
+    },
+    tryRestoreLogin: async () => {
+      let results = await Adaptors.tryRestoreLoginAsync()
+      setAuthData({ ...baseAuthData, ...results })
     }
-  }, baseAuthData);
+  }), [])
 
-  // const adaptors = React.useMemo(() => ({
-  // //  authData: authData,
-  //   login: async (username, password) => {
-  //     let results = await Adaptor.tryLogin(username, password)
-  //     dispatch({
-  //       type: config.LOGIN,
-  //       results
-  //     })
-  //   },
-  //   logout: async () => {
-  //     let results = await Adaptor.tryLogout()
-  //     dispatch({
-  //       type: config.LOGOUT,
-  //       // results
-  //     })
-  //   },
-  // }), [])
+  useCallback(async () => await adaptors.tryRestoreLogin(), [])
 
-  const adaptors = {
-    login: async (username, password) => {
-      let results = await Adaptor.tryLoginAsync(username, password)
-      dispatch({
-        type: config.LOGIN,
-        results
-      })
-    },
-    logout: async () => {
-      let results = await Adaptor.tryLogoutAsync()
-      dispatch({
-        type: config.LOGOUT,
-        results
-      })
-    },
-  }
-
-  // return authContext
-  // return adaptors
   return { authData, ...adaptors }
 };
 
 const baseAuthData = {
   isLogin: false,
   userData: {},
-  error: null,
+  condition: config.CONDITION_OK,
 };

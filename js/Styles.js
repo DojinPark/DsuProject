@@ -2,8 +2,9 @@
 import React from "react"
 import { Dimensions } from "react-native"
 
-const { width } = Dimensions.get("window")
+const { width, height } = Dimensions.get("window")
 const WIDTH = width
+const HEIGHT = height
 
 export const styles = {
   pressedOpacity: {
@@ -15,6 +16,15 @@ export const styles = {
     padding: 10,
     margin: 10,
   },
+  temporaryOverlay: {
+    opacity: 0.85,
+    // backgroundColor: 'silver',
+    backgroundColor: 'silver',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: HEIGHT*0.4,
+  },
+  
   homeTabListCellItem: {
     justifyContent: "center",
     alignItems: "center",
