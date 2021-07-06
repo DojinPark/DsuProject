@@ -4,12 +4,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from 'expo-secure-store';
 import { config } from "../utils.js"
 import { AuthContext } from "./AuthContext.js"
+import TemporaryOverlay from "../components/TemporaryOverlay.js"
 
 export const AuthDebugger = (props) => {
   const auth = useContext(AuthContext)
 
   const [ userData, setUserData ] = useState({message: "initial state"})
-  const [ token, setToken ] = useState("empty token")
+  const [ token, setToken ] = useState("initial state")
   const [ reload, setReload ] = useState(false)
 
   React.useEffect(
@@ -17,7 +18,7 @@ export const AuthDebugger = (props) => {
       AsyncStorage.getItem(config.USER_DATA)
       .then(o => JSON.parse(o))
       .then(o => setUserData(o))
-      .catch(e => setUserData({message: "logged out"}))
+      .catch(e => setUserData("null"))
     }
   , [auth.authData.isLogin, reload])
 
@@ -35,13 +36,19 @@ export const AuthDebugger = (props) => {
     <Text>{"> from SecureStorage: "}</Text>
     {Platform.OS === "web" && token
     ? <Text>{"Unsupported on web-based platforms"}</Text>
-    : <Text>{token ? token : "Logged Out!"}</Text>
+    : <Text>{token}</Text>
     }
 
     <Text>{"> from AsyncStorage: "}</Text>
-    {userData ? Object.entries(userData).map(([k, v], i) => <Text>{k+": "+v}</Text>) : <Text>{"Logged Out!"}</Text>}
+    {userData ? Object.entries(userData).map(([k, v], i) => <Text>{k+": "+v}</Text>) : <Text>{userData}</Text>}
 
     <Button title={"reload"} onPress={() => {setReload(!reload)}} />
+
+    {Platform.OS === "web" ?
+      <TemporaryOverlay>
+        <Text style={{fontSize:12}}>{'브라우저에선 tryout login/logout을 사용해주세요!'}</Text>
+      </TemporaryOverlay>
+    : null}
     
   </View>)
 }
